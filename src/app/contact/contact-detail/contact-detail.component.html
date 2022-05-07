@@ -3,14 +3,14 @@
   <div class="panel-heading">
     <div class="row">
       <div class="col-xs-12">
-        <h1>Contact name</h1>
+        <h1>{{contact.name}}</h1>
       </div>
     </div>
 
     <div class="row">
       <div class="col-xs-4">
         <div class="pull-left">
-          <img  src="" alt="" class="img-responsive" style="max-height: 100px">
+          <img  src="{{contact.imageUrl}}" alt="" class="img-responsive" style="max-height: 100px">
         </div>
       </div>
       <div class="col-xs-6">
@@ -25,8 +25,8 @@
     </div>
   </div>
   <div class="panel-body">
-      <p><span style="font-weight: bold">Email: </span></p>
-      <p><span style="font-weight: bold">Phone: </span></p>
+      <p><span style="font-weight: bold">Email: {{contact.email}}</span></p>
+      <p><span style="font-weight: bold">Phone: {{contact.phone}}</span></p>
 
 
   </div>
