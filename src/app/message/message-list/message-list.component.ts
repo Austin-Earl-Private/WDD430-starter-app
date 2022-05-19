@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Message} from "../mesage.model";
+import {MessageService} from "../message.service";
 
 @Component({
   selector: 'app-message-list',
@@ -7,12 +8,14 @@ import {Message} from "../mesage.model";
   styleUrls: ['./message-list.component.css']
 })
 export class MessageListComponent implements OnInit {
-  messages: Message[] = [new Message(1, "Subject1", "Message 1 test", "System"), new Message(2, "Subject2", "Message 2 test", "System"), new Message(3, "Subject3", "Message 3 test", "System")];
+  messages: Message[] = [];
 
-  constructor() {
+  constructor(private messageService:MessageService) {
   }
 
   ngOnInit(): void {
+    this.messages = this.messageService.getMessages();
+    this.messageService.messageChangedEvent.subscribe((messages)=>this.messages = messages)
   }
 
   addMessage(event: Message) {
