@@ -1,10 +1,8 @@
-<app-header (selectedFeatureEvent)="selectedRout = $event"></app-header>
+<app-header></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-contact *ngIf="selectedRout==='contacts'"></app-contact>
-      <app-message-list *ngIf="selectedRout==='messages'"></app-message-list>
-      <app-document *ngIf="selectedRout==='documents'"></app-document>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

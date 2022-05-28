@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactListComponent } from './contact-list.component';
 import {ContactItemComponent} from "../contact-item/contact-item.component";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -14,7 +15,8 @@ import {ContactItemComponent} from "../contact-item/contact-item.component";
         ContactListComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        RouterModule
     ]
 })
 export class ContactListModule { }

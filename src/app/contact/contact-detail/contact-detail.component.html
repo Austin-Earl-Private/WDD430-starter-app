@@ -15,8 +15,8 @@
       </div>
       <div class="col-xs-6">
         <div class="pull-right btn-group">
-          <button class="btn btn-primary">Edit</button>
-          <button class="btn btn-danger">Delete</button>
+          <button class="btn btn-primary" [routerLink]="['edit']">Edit</button>
+          <button class="btn btn-danger" (click)="deleteContact()">Delete</button>
         </div>
       </div>
 <!--      <div class="col-xs-6">-->

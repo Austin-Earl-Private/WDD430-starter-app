@@ -6,14 +6,14 @@
 
       </div>
       <div class="col-xs-4" style="margin-top: auto; margin-bottom: auto; display: flex; flex-direction: column;align-items: end">
-        <button class="pull-right btn btn-success" >New Contact</button>
+        <button class="pull-right btn btn-success" [routerLink]="['/contacts/new']">New Contact</button>
 
       </div>
     </div>
 
   </div>
   <div class="panel-body">
-        <app-contact-item *ngFor="let contact_item of contacts" [contact]="contact_item" (click)="onSelected(contact_item)"></app-contact-item>
+        <app-contact-item *ngFor="let contact_item of contacts" [contact]="contact_item" [routerLink]="[contact_item.id]" ></app-contact-item>
   </div>
 </div>
 

@@ -14,6 +14,10 @@ import { MessageListComponent } from './message/message-list/message-list.compon
 import { MessageItemComponent } from './message/message-item/message-item.component';
 import { MessageEditComponent } from './message/message-edit/message-edit.component';
 import { DropdownDirective } from './share/dropdown.directive';
+import {RouterModule} from "@angular/router";
+import {routes} from "./app-routing.constants";
+import { DocumentEditComponent } from './document/document-edit/document-edit.component';
+import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +32,14 @@ import { DropdownDirective } from './share/dropdown.directive';
     MessageListComponent,
     MessageItemComponent,
     MessageEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    DocumentEditComponent,
+    ContactEditComponent
   ],
   imports: [
     BrowserModule,
-    ContactListModule
+    ContactListModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   exports: [],
