@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Contact} from "./contact.model";
 import {ContactService} from "./contact.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-contact',
@@ -14,5 +15,6 @@ export class ContactComponent implements OnInit {
   ngOnInit(): void {
     this.contactService.contactSelectedEvent.subscribe((contact)=>{this.selectedContact = contact});
   }
+
 
 }
