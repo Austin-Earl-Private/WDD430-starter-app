@@ -13,7 +13,9 @@
 
   </div>
   <div class="panel-body">
-        <app-contact-item *ngFor="let contact_item of contacts" [contact]="contact_item" [routerLink]="[contact_item.id]" ></app-contact-item>
+        <app-contact-item *ngFor="let contact_item of contacts" [contact]="contact_item" [routerLink]="[contact_item.id]"
+        dnd-draggable [dragEnabled]="true" [dragData]="contact_item" [dropZones]="['contactGroup']"
+        ></app-contact-item>
   </div>
 </div>
 

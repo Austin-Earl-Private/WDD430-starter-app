@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ContactListComponent } from './contact-list.component';
 import {ContactItemComponent} from "../contact-item/contact-item.component";
 import {RouterModule} from "@angular/router";
+import {DndModule} from "ng2-dnd";
 
 
 
@@ -12,11 +13,13 @@ import {RouterModule} from "@angular/router";
       ContactItemComponent,
     ],
     exports: [
-        ContactListComponent
+        ContactListComponent,
+        ContactItemComponent
     ],
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+        DndModule
     ]
 })
 export class ContactListModule { }

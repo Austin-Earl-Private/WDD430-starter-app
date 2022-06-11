@@ -18,6 +18,8 @@ import {RouterModule} from "@angular/router";
 import {routes} from "./app-routing.constants";
 import { DocumentEditComponent } from './document/document-edit/document-edit.component';
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
+import {FormsModule} from "@angular/forms";
+import {DndModule} from "ng2-dnd";
 
 @NgModule({
   declarations: [
@@ -36,11 +38,13 @@ import { ContactEditComponent } from './contact/contact-edit/contact-edit.compon
     DocumentEditComponent,
     ContactEditComponent
   ],
-  imports: [
-    BrowserModule,
-    ContactListModule,
-    RouterModule.forRoot(routes)
-  ],
+    imports: [
+        BrowserModule,
+        ContactListModule,
+        RouterModule.forRoot(routes),
+        FormsModule,
+        DndModule.forRoot(),
+    ],
   providers: [],
   exports: [],
   bootstrap: [AppComponent]
