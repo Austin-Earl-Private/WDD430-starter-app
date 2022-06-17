@@ -13,8 +13,8 @@ export class ContactDetailComponent implements OnInit {
   constructor(private router: Router, private route:ActivatedRoute, private contactService:ContactService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params)=>{
-      this.contact =this.contactService.getContact(params['id'])
+    this.route.params.subscribe(async (params)=>{
+      this.contact = await this.contactService.getContact(params['id'])
     })
   }
 

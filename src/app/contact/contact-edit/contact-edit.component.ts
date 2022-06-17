@@ -24,14 +24,14 @@ export class ContactEditComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params: Params) =>{
+  async ngOnInit(): Promise<void> {
+    this.route.params.subscribe(async (params: Params) =>{
       const id = params['id'];
       if(!id){
         this.editMode = false;
         return;
       }
-      this.originalContact = this.contactService.getContact(id);
+      this.originalContact =  await this.contactService.getContact(id);
       if(!this.originalContact){
         return;
       }
@@ -60,6 +60,7 @@ export class ContactEditComponent implements OnInit {
       return;
     }
     this.groupContacts.splice(index, 1);
+    this.invalidContact = false;
   }
   addToGroup(event:any){
     const selectedContact = event.dragData;

@@ -4,6 +4,8 @@ import { ContactListComponent } from './contact-list.component';
 import {ContactItemComponent} from "../contact-item/contact-item.component";
 import {RouterModule} from "@angular/router";
 import {DndModule} from "ng2-dnd";
+import {AppModule} from "../../app.module";
+import {ContactsFilterPipe} from "../contacts-filter.pipe";
 
 
 
@@ -11,15 +13,16 @@ import {DndModule} from "ng2-dnd";
     declarations: [
         ContactListComponent,
       ContactItemComponent,
+      ContactsFilterPipe
     ],
     exports: [
         ContactListComponent,
         ContactItemComponent
     ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        DndModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule,
+    DndModule,
+  ]
 })
 export class ContactListModule { }

@@ -11,11 +11,13 @@ export class MessageListComponent implements OnInit {
   messages: Message[] = [];
 
   constructor(private messageService:MessageService) {
+
   }
 
-  ngOnInit(): void {
-    this.messages = this.messageService.getMessages();
-    this.messageService.messageChangedEvent.subscribe((messages)=>this.messages = messages)
+  async ngOnInit(): Promise<void> {
+
+    this.messages =this.messageService.getMessages();
+    this.messageService.messageChangedEvent.subscribe((messages)=>this.messages = messages);
   }
 
   addMessage(event: Message) {

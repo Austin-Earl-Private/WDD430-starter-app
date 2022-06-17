@@ -20,6 +20,7 @@ import { DocumentEditComponent } from './document/document-edit/document-edit.co
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
 import {FormsModule} from "@angular/forms";
 import {DndModule} from "ng2-dnd";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -38,15 +39,15 @@ import {DndModule} from "ng2-dnd";
     DocumentEditComponent,
     ContactEditComponent
   ],
-    imports: [
-        BrowserModule,
-        ContactListModule,
-        RouterModule.forRoot(routes),
-        FormsModule,
-        DndModule.forRoot(),
-    ],
+  imports: [
+    BrowserModule,
+    ContactListModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+    DndModule.forRoot(),
+    HttpClientModule
+  ],
   providers: [],
-  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
