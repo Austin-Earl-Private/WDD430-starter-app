@@ -5,6 +5,7 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose');
 
 // import the routing file to handle the default (index) route
 var index = require('./routes/app');
@@ -60,6 +61,18 @@ const port = process.env.PORT || '3000';
 app.set('port', port);
 
 // Create HTTP server.
+
+mongoose.connect('mongodb+srv://database:vbfgrt45%24%25@cluster0.lj6vk.mongodb.net/cms?authSource=admin&replicaSet=atlas-8hg6f6-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true',
+  { useNewUrlParser: true }, (err, res) => {
+    if (err) {
+      console.log('Connection failed: ' + err);
+    }
+    else {
+      console.log('Connected to database!');
+    }
+  }
+);
+
 const server = http.createServer(app);
 
 // Tell the server to start listening on the provided port

@@ -28,7 +28,7 @@ export class DocumentDetailComponent implements OnInit {
   }
   onDelete() {
     this.docService.deleteDocument(this.document);
-    this.router.navigate(['/documents'])
+    this.router.navigate(['/documents.js'])
   }
 
 }

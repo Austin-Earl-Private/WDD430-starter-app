@@ -3,6 +3,7 @@ import {Document} from "./document.model";
 import {MOCKDOCUMENTS} from "../../MOCKDOCUMENTS";
 import {Subject} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -13,31 +14,32 @@ export class DocumentService {
   // documentChangedEvent = new EventEmitter<Document[]>();
   documentChangedEvent = new Subject<Document[]>();
   maxId:number;
-  constructor(private httpClient: HttpClient) {
-    httpClient.get(`https://cms-project-87bc7-default-rtdb.firebaseio.com/documents.json`).subscribe(
+  constructor(private httpClient: HttpClient, private router: Router) {
+    httpClient.get(`http://localhost:3000/documents`).subscribe(
       (documents:Document[] )=>{
         this.documents = documents;
         this.maxId = this.getMaxId();
-        this.documents.sort((doc1,doc2)=>{
-          return parseInt(doc1.id) - parseInt(doc2.id);
-        })
-        this.documentChangedEvent.next([...this.documents]);
+        this.sortAndSend()
+        // this.documents.sort((doc1,doc2)=>{
+        //   return parseInt(doc1.id) - parseInt(doc2.id);
+        // })
+        // this.documentChangedEvent.next([...this.documents]);
       },
     (error:any)=>{
         console.error(error);
     }
     )
-    this.documents = MOCKDOCUMENTS
-    this.maxId = this.getMaxId();
+    // this.documents = MOCKDOCUMENTS
+    // this.maxId = this.getMaxId();
   }
 
-  storeDocuments() {
-    const headers = new HttpHeaders();
-    headers.set('Content-Type','application/json');
-    this.httpClient.put('https://cms-project-87bc7-default-rtdb.firebaseio.com/documents.json',this.documents,{headers}).subscribe(()=>{
-      this.documentChangedEvent.next([...this.documents]);
-    })
-  }
+  // storeDocuments() {
+  //   const headers = new HttpHeaders();
+  //   headers.set('Content-Type','application/json');
+  //   this.httpClient.put('https://cms-project-87bc7-default-rtdb.firebaseio.com/documents.json',this.documents,{headers}).subscribe(()=>{
+  //     this.documentChangedEvent.next([...this.documents]);
+  //   })
+  // }
   getDocuments():Document[]{
     return [...this.documents]
   }
@@ -63,11 +65,13 @@ export class DocumentService {
     if (pos < 0) {
       return;
     }
-    this.documents.splice(pos, 1);
-    this.storeDocuments()
-    // // this.documentChangedEvent.emit([...this.documents]);
-    // this.documentChangedEvent.next([...this.documents]);
-
+    this.httpClient.delete('http://localhost:3000/documents/' + document.id)
+      .subscribe(
+        (response: Response) => {
+          this.documents.splice(pos, 1);
+          this.sortAndSend();
+        }
+      );
   }
 
   updateDocument(oldDocument:Document,newDocument:Document){
@@ -79,20 +83,35 @@ export class DocumentService {
       return;
     }
     newDocument.id = oldDocument.id;
-    this.documents[pos] = newDocument;
-    // this.documentChangedEvent.next([...this.documents]);
-    this.storeDocuments()
+    newDocument._id = oldDocument._id;
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.httpClient.put('http://localhost:3000/documents/' + oldDocument.id,
+      newDocument, { headers: headers })
+      .subscribe(
+        (response: Response) => {
+          this.documents[pos] = newDocument;
+          this.sortAndSend();
+        }
+      );
   }
 
   addDocument(document:Document){
     if(!document){
       return
     }
-    this.maxId++
-    document.id = this.maxId+'';
-    this.documents.push(document);
-    // this.documentChangedEvent.next([...this.documents]);
-    this.storeDocuments()
+    document.id = '';
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.httpClient.post<{ message: string, document: Document }>('http://localhost:3000/documents',
+      document,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          // add new document to documents
+          this.documents.push(responseData.document);
+          this.sortAndSend();
+        }
+      );
   }
 
   getMaxId():number {
@@ -104,5 +123,11 @@ export class DocumentService {
       }
     }
     return maxid;
+  }
+  sortAndSend(){
+    this.documents = this.documents.sort((mes1,mes2)=>{
+      return parseInt(mes1.id)-parseInt(mes2.id);
+    })
+    this.documentChangedEvent.next([...this.documents])
   }
 }

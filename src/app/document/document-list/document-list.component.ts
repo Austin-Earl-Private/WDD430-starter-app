@@ -10,7 +10,7 @@ import {Subscription} from "rxjs";
 })
 export class DocumentListComponent implements OnInit, OnDestroy {
   // @Output() selectedDocumentEvent = new EventEmitter<Document>();
-  // documents:Document[] = [new Document(1,"doc1","Document 1 test","URL",""),new Document(2,"doc2","Document 2 test","URL",""),new Document(3,"doc3","Document 3 test","URL",""),new Document(4,"doc4","Document 4 test","URL","")]
+  // documents.js:Document[] = [new Document(1,"doc1","Document 1 test","URL",""),new Document(2,"doc2","Document 2 test","URL",""),new Document(3,"doc3","Document 3 test","URL",""),new Document(4,"doc4","Document 4 test","URL","")]
   documents:Document[] = [];
   subscription: Subscription;
   constructor(private documentService:DocumentService) { }
